@@ -1,0 +1,2 @@
+module PUBG::Telemetry
+end
