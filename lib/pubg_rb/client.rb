@@ -21,7 +21,7 @@ module PUBG
     # Usage:
     #   client = PUBG::Client.new(api_token: '097cd31f3a08fef202b3eefd18853d69', platform: 'xbox', region: 'as')
     #
-    # Arguments:
+    # Options:
     #   api_token: (String)
     #
     # Returns:
