@@ -5,8 +5,11 @@ module PUBG
   class Client
     # Include HTTParty Module
     include HTTParty
-    # Format HTTP response automatically to JSON
+    # Format response to json
     format :json
+
+    # Since headers default to GZIP, ensure body is decompressed prior to being parsed
+    parser PUBG::JsonGzipParser
 
     include Matches
     include Telemetry
@@ -30,7 +33,7 @@ module PUBG
       @region    = options[:region]    || nil
 
       auth_token = @api_token.nil? ? '' : "Bearer #{@api_token}"
-      @headers = { 'Authorization' => auth_token, 'Accept-Encoding' => 'gzip, deflate', 'Accept' => 'application/vnd.api+json' }
+      @headers = { headers: { 'Authorization' => auth_token, 'Accept-Encoding' => 'gzip', 'Accept' => 'application/vnd.api+json' } }
 
       # Grab our shards url fragment to setup the base_uri
       if @platform.nil? || @region.nil?
@@ -48,7 +51,7 @@ module PUBG
       self.class.get(path, @headers)
     end
 
-    private 
+    private
 
     # Build shard URL fragment
     def shard_select(platform, region)

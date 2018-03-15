@@ -1,4 +1,5 @@
 require 'httparty'
+require 'pubg_rb/json_gzip_parser.rb'
 
 require "pubg_rb/version"
 require "pubg_rb/status"
